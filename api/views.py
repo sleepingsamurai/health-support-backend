@@ -11,8 +11,13 @@ from django.contrib.auth.models import User
 @api_view(['GET'])
 def apiOverview(request):
     api_urls = {
-        'List' : '/user-list/',
+        'UserList' : '/user-list/',
         'Register' : '/user-register/',
+        'HospitalList' : '/hospital-list/',
+        'VaccineSlotList' : '/vaccine-slot-list/',
+        'BedList' : '/bed-list/',
+        'OxygenCylinderList' : '/oxygen-cylinder-list/',
+        'BookingList' : '/booking-list/',
     }
     return Response(api_urls)
 
