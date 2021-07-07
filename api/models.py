@@ -43,6 +43,3 @@ class Bookings(models.Model) :
     user = models.ForeignKey(UserModel, on_delete=models.CASCADE)
     hospital = models.ForeignKey(Hospitals, on_delete=models.CASCADE)
     item = models.ForeignKey(Items,  on_delete=models.CASCADE)
-
-    def __str__(self):
-        return self.user

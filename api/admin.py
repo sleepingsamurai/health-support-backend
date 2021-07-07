@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Hospitals, Items, VaccineSlots, Beds, OxygenCylinder, Bookings
+from .models import *
 
 # Register your models here.
 admin.site.register(Hospitals)
