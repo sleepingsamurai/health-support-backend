@@ -12,6 +12,7 @@ class Hospitals(models.Model) :
     def __str__(self):
         return self.name
 
+
 class Items(models.Model) :
     name = models.TextField()
 

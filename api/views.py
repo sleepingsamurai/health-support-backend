@@ -77,13 +77,11 @@ def oxygenCylinderList(request):
 @authentication_classes([TokenAuthentication])
 @permission_classes([IsAuthenticated])
 def bookingsList(request):
-    bookings = Bookings.objects.all()
+    bookings = request.user.bookings_set.all()
     serializer = BookingSerializer(bookings, many=True)
     return Response(serializer.data)
 
 @api_view(['POST'])
-@authentication_classes([TokenAuthentication])
-@permission_classes([IsAuthenticated])
 def userRegister(request):
     serializer = UserSerializer(data=request.data)
     if serializer.is_valid():
