@@ -52,6 +52,14 @@ def itemList(request):
 @api_view(['GET'])
 @authentication_classes([TokenAuthentication])
 @permission_classes([IsAuthenticated])
+def vaccineTypeList(request):
+    vaccinetype = VaccineType.objects.all()
+    serializer = VaccineTypeSerializer(vaccinetype, many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
 def vaccineSlotList(request):
     vaccineslots = VaccineSlots.objects.all()
     serializer = VaccineSerializer(vaccineslots, many=True)

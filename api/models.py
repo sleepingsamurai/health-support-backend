@@ -7,7 +7,7 @@ UserModel = get_user_model()
 # Create your models here.
 
 class Hospitals(models.Model) :
-    name = models.TextField()
+    name = models.TextField(primary_key=True)
 
     def __str__(self):
         return self.name
@@ -19,12 +19,16 @@ class Items(models.Model) :
     def __str__(self):
         return self.name
 
-class VaccineSlots(models.Model) :
-    vaccine_slot_code = models.CharField(max_length = 20)
-    hospital = models.ForeignKey(Hospitals, on_delete=models.CASCADE)
+class VaccineType(models.Model):
+    name = models.TextField()
 
     def __str__(self):
-        return self.vaccine_slot_code
+        return self.name
+
+class VaccineSlots(models.Model) :
+    hospital = models.ForeignKey(Hospitals, on_delete=models.CASCADE)
+    type = models.ForeignKey(VaccineType, on_delete=models.CASCADE, null=True)
+    quantity = models.PositiveIntegerField(null=True)
 
 class Beds(models.Model) :
     bed_code = models.CharField(max_length = 20)

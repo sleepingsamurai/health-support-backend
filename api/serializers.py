@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import fields
 from rest_framework import serializers
 from django.contrib.auth.models import User
 from .models import *
@@ -27,6 +28,11 @@ class HospitalSerializer(serializers.ModelSerializer) :
 class ItemSerializer(serializers.ModelSerializer) :
     class Meta:
         model = Items
+        fields = '__all__'
+
+class VaccineTypeSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = VaccineType
         fields = '__all__'
 
 class VaccineSerializer(serializers.ModelSerializer) :

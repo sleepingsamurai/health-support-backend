@@ -7,6 +7,7 @@ urlpatterns = [
     path('user-list/', views.userList,name="user-list"),
     path('user-register/', views.userRegister,name="user-register"),
     path('hospital-list/', views.hospitalList,name="hospital-list"),
+    path('vaccine-type-list/', views.vaccineTypeList, name="vaccine-type-list"),
     path('vaccine-slot-list/', views.vaccineSlotList,name="vaccine-slot-list"),
     path('bed-list/', views.bedsList,name="bed-list"),
     path('oxygen-cylinder-list/', views.oxygenCylinderList,name="oxygen-cylinder-list"),

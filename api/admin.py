@@ -1,3 +1,4 @@
+from api.views import vaccineTypeList
 from django.contrib import admin
 from .models import *
 
@@ -8,4 +9,5 @@ admin.site.register(VaccineSlots)
 admin.site.register(Beds)
 admin.site.register(OxygenCylinder)
 admin.site.register(Bookings)
+admin.site.register(VaccineType)
 
