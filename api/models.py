@@ -7,7 +7,7 @@ UserModel = get_user_model()
 # Create your models here.
 
 class Hospitals(models.Model) :
-    name = models.TextField(primary_key=True)
+    name = models.TextField()
 
     def __str__(self):
         return self.name

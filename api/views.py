@@ -1,3 +1,4 @@
+import re
 from django.shortcuts import render
 from django.http import JsonResponse
 from rest_framework import serializers
@@ -33,61 +34,105 @@ def userList(request):
     serializer = UserSerializer(users, many=True)
     return Response(serializer.data)
 
-@api_view(['GET'])
+
+@api_view(['GET','POST'])
 @authentication_classes([TokenAuthentication])
 @permission_classes([IsAuthenticated])
 def hospitalList(request):
-    hospitals = Hospitals.objects.all()
-    serializer = HospitalSerializer(hospitals, many=True)
-    return Response(serializer.data)
+    if request.method == 'GET':
+        hospitals = Hospitals.objects.all()
+        serializer = HospitalSerializer(hospitals, many=True)
+        return Response(serializer.data)
+    elif request.method == 'POST':
+        serializer = HospitalSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+        return Response(serializer.data)
 
-@api_view(['GET'])
+
+@api_view(['GET','POST'])
 @authentication_classes([TokenAuthentication])
 @permission_classes([IsAuthenticated])
 def itemList(request):
-    items = Items.objects.all()
-    serializer = ItemSerializer(items, many=True)
-    return Response(serializer.data)
+    if request.method == 'GET':
+        items = Items.objects.all()
+        serializer = ItemSerializer(items, many=True)
+        return Response(serializer.data)
+    elif request.method == 'POST':
+        serializer = ItemSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+        return Response(serializer.data)
 
 @api_view(['GET'])
 @authentication_classes([TokenAuthentication])
 @permission_classes([IsAuthenticated])
 def vaccineTypeList(request):
-    vaccinetype = VaccineType.objects.all()
-    serializer = VaccineTypeSerializer(vaccinetype, many=True)
-    return Response(serializer.data)
+    if request.method == 'GET':
+        vaccinetype = VaccineType.objects.all()
+        serializer = VaccineTypeSerializer(vaccinetype, many=True)
+        return Response(serializer.data)
+    elif request.method == 'POST':
+        serializer = VaccineTypeSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+        return Response(serializer.data)
 
 @api_view(['GET'])
 @authentication_classes([TokenAuthentication])
 @permission_classes([IsAuthenticated])
 def vaccineSlotList(request):
-    vaccineslots = VaccineSlots.objects.all()
-    serializer = VaccineSerializer(vaccineslots, many=True)
-    return Response(serializer.data)
+    if request.method == 'GET':
+        vaccineslots = VaccineSlots.objects.all()
+        serializer = VaccineSerializer(vaccineslots, many=True)
+        return Response(serializer.data)
+    elif request.method == 'POST':
+        serializer = VaccineSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+        return Response(serializer.data)
 
 @api_view(['GET'])
 @authentication_classes([TokenAuthentication])
 @permission_classes([IsAuthenticated])
 def bedsList(request):
-    beds = Beds.objects.all()
-    serializer = BedSerializer(beds, many=True)
-    return Response(serializer.data)
+    if request.method == 'GET':
+        beds = Beds.objects.all()
+        serializer = BedSerializer(beds, many=True)
+        return Response(serializer.data)
+    elif request.method == 'POST':
+        serializer = BedSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+        return Response(serializer.data)
 
 @api_view(['GET'])
 @authentication_classes([TokenAuthentication])
 @permission_classes([IsAuthenticated])
 def oxygenCylinderList(request):
-    oxygencylinders = OxygenCylinder.objects.all()
-    serializer = OxygenSerializer(oxygencylinders, many=True)
-    return Response(serializer.data)
+    if request.method == 'GET':
+        oxygencylinders = OxygenCylinder.objects.all()
+        serializer = OxygenSerializer(oxygencylinders, many=True)
+        return Response(serializer.data)
+    elif request.method == 'POST':
+        serializer = OxygenSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+        return Response(serializer.data)
 
 @api_view(['GET'])
 @authentication_classes([TokenAuthentication])
 @permission_classes([IsAuthenticated])
 def bookingsList(request):
-    bookings = request.user.bookings_set.all()
-    serializer = BookingSerializer(bookings, many=True)
-    return Response(serializer.data)
+    if request.methd == 'GET':
+        bookings = request.user.bookings_set.all()
+        serializer = BookingSerializer(bookings, many=True)
+        return Response(serializer.data)
+    elif request.method == 'POST':
+        serializer = BookingSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+        return Response(serializer.data)
 
 @api_view(['POST'])
 def userRegister(request):
