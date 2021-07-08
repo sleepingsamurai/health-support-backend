@@ -18,11 +18,14 @@ def apiOverview(request):
         'UserList' : '/user-list/',
         'Register' : '/user-register/',
         'HospitalList' : '/hospital-list/',
+        'VaccineTypeList' : '/vaccine-type-list/',
         'VaccineSlotList' : '/vaccine-slot-list/',
         'BedList' : '/bed-list/',
         'OxygenCylinderList' : '/oxygen-cylinder-list/',
         'BookingList' : '/booking-list/',
         'ItemList' : '/item-list/',
+        'VaccineTypeSlot' : '/vaccine-slot/<str:vactid>/',
+        'HospitalVaccineSlot' : '/hospital-vaccine-slot/<str:hospid>',
     }
     return Response(api_urls)
 
@@ -140,3 +143,24 @@ def userRegister(request):
     if serializer.is_valid():
         serializer.save()
     return Response(serializer.data)
+
+@api_view(['GET'])
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
+def getVaccineTypeSlots(request, vactid) :
+    vaccinetype = VaccineType.objects.get(id=vactid)
+    slots = vaccinetype.vaccineslots_set.all()
+    serializer = VaccineSerializer(slots, many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
+def getHospitalVaccineSlots(request, hospid) :
+    hospital = Hospitals.objects.get(id=hospid)
+    slots = hospital.vaccineslots_set.all()
+    serializer = VaccineSerializer(slots, many=True)
+    return Response(serializer.data)
+
+
+

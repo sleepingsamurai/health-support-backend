@@ -13,5 +13,6 @@ urlpatterns = [
     path('oxygen-cylinder-list/', views.oxygenCylinderList,name="oxygen-cylinder-list"),
     path('booking-list/', views.bookingsList,name="booking-list"),
     path('item-list/', views.itemList,name="item-list"),
-
+    path('vaccine-slot/<str:vactid>/', views.getVaccineTypeSlots,name="vaccine-slot-type"),
+    path('hospital-vaccine-slot/<str:hospid>/', views.getHospitalVaccineSlots,name="hospital-vaccine-slot"),
 ]
