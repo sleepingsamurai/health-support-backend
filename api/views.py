@@ -26,6 +26,10 @@ def apiOverview(request):
         'ItemList' : '/item-list/',
         'VaccineTypeSlot' : '/vaccine-slot/<str:vactid>/',
         'HospitalVaccineSlot' : '/hospital-vaccine-slot/<str:hospid>',
+        'VaccineType' : '/vaccine-type/<str:vacid>/',
+        'HospitalBeds' : '/hospital-bed/<str:hospid>/',
+        'HospitalOxygen' : '/hospital-oxygen/<str:hospid>/',
+        'User': '/user/'
     }
     return Response(api_urls)
 
@@ -162,5 +166,39 @@ def getHospitalVaccineSlots(request, hospid) :
     serializer = VaccineSerializer(slots, many=True)
     return Response(serializer.data)
 
+
+@api_view(['GET'])
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
+def getVaccineType(request, vacid) :
+    type = VaccineType.objects.get(id=vacid)
+    serializer = VaccineTypeSerializer(type, many=False)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
+def getHospitalBeds(request, hospid) :
+    hospital = Hospitals.objects.get(id=hospid)
+    beds = hospital.beds_set.all()
+    serializer = BedSerializer(beds, many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
+def getHospitalOxygen(request, hospid) :
+    hospital = Hospitals.objects.get(id=hospid)
+    cylinders = hospital.oxygencylinder_set.all()
+    serializer = OxygenSerializer(cylinders, many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+@authentication_classes([TokenAuthentication])
+@permission_classes([IsAuthenticated])
+def getUser(request) :
+    user = request.user
+    serializer = UserSerializer(user, many=False)
+    return Response(serializer.data)
 
 

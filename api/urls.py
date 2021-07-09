@@ -15,4 +15,8 @@ urlpatterns = [
     path('item-list/', views.itemList,name="item-list"),
     path('vaccine-slot/<str:vactid>/', views.getVaccineTypeSlots,name="vaccine-slot-type"),
     path('hospital-vaccine-slot/<str:hospid>/', views.getHospitalVaccineSlots,name="hospital-vaccine-slot"),
+    path('vaccine-type/<str:vacid>/', views.getVaccineType, name="vaccine-type"),
+    path('hospital-bed/<str:hospid>/', views.getHospitalBeds, name="hospital-bed"),
+    path('hospital-oxygen/<str:hospid>/', views.getHospitalOxygen, name="hospital-oxygen"),
+    path('user/', views.getUser, name='user')
 ]
